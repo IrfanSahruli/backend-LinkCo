@@ -104,7 +104,7 @@ const register = async (req, res) => {
             return res.status(409).json({
                 code: 409,
                 success: false,
-                message: 'Nama telah digunakan'
+                message: 'Email telah digunakan'
             });
         }
 
@@ -113,7 +113,7 @@ const register = async (req, res) => {
             return res.status(409).json({
                 code: 409,
                 success: false,
-                message: 'Nama telah digunakan'
+                message: 'Nomor Hand Phone telah digunakan'
             });
         }
 
@@ -176,7 +176,7 @@ const login = async (req, res) => {
             return res.status(409).json({
                 code: 409,
                 success: false,
-                message: 'Email user tidak tersedia'
+                message: 'Email belum terdaftar'
             });
         }
 
@@ -206,7 +206,7 @@ const login = async (req, res) => {
         res.status(200).json({
             code: 200,
             success: true,
-            message: 'Login successful',
+            message: 'Login berhasil',
             data: {
                 user,
                 token
@@ -250,7 +250,11 @@ const getMe = async (req, res) => {
     try {
         const user = await User.findOne({
             where: { id: userId },
-            attributes: { exclude: ['password'] }
+            attributes: { exclude: ['password'] },
+            include: {
+                model: Affiliate,
+                as: 'affiliate'
+            }
         });
 
         if (!user) {

@@ -128,9 +128,10 @@ const completeOrder = async (req, res) => {
 const getAllOrder = async (req, res) => {
     try {
         const order = await Order.findAll({
-            include: {
-                model: Product
-            }
+            include: [
+                { model: Product },
+                { model: User }
+            ]
         });
 
         res.status(200).json({
@@ -154,9 +155,10 @@ const getOrderByOrderId = async (req, res) => {
     try {
         const order = await Order.findOne({
             where: { orderId },
-            include: {
-                model: Product
-            }
+            include: [
+                { model: Product },
+                { model: User }
+            ]
         });
         if (!order) {
             return res.status(404).json({

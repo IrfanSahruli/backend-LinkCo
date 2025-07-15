@@ -24,6 +24,10 @@ const User = database.define('user', {
         type: DataTypes.INTEGER,
         defaultValue: 0
     },
+    isKYCApproved: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    },
     role: {
         type: DataTypes.ENUM,
         values: ['user', 'admin']

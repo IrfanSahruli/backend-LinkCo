@@ -12,4 +12,10 @@ router.use('/', require('./Order/order'));
 //Affiliate
 router.use('/', require('./Affiliate/affiliate'));
 
+//Withdraw
+router.use('/', require('./Users/withdraw'));
+
+//Kyc
+router.use('/', require('./Users/kyc'));
+
 module.exports = router;

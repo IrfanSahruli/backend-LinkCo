@@ -100,7 +100,7 @@ const updateProduct = async (req, res) => {
     } = req.body;
 
     try {
-        const product = Product.findOne({ where: { id } });
+        const product = await Product.findOne({ where: { id } });
         if (!product) {
             return res.status(404).json({
                 code: 404,
@@ -132,9 +132,40 @@ const updateProduct = async (req, res) => {
     }
 };
 
+const deleteProduct = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const product = await Product.findOne({ where: { id } });
+
+        if (!product) {
+            return res.status(404).json({
+                code: 404,
+                success: false,
+                message: 'Product tidak ditemukan'
+            });
+        }
+
+        await product.destroy();
+
+        res.status(200).json({
+            code: 200,
+            success: true,
+            message: 'Berhasil hapus product'
+        });
+    } catch (error) {
+        res.status(500).json({
+            code: 500,
+            success: false,
+            message: error.message
+        });
+    }
+};
+
 module.exports = {
     addProduct,
     getAllProduct,
     getOneProduct,
-    updateProduct
+    updateProduct,
+    deleteProduct
 };

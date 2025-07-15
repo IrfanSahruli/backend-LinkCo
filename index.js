@@ -11,6 +11,8 @@ const Affiliate = require('./models/Affiliate/affiliate');
 const Product = require('./models/Product/product');
 const Order = require('./models/Order/order');
 const Commission = require('./models/Affiliate/commission');
+const Withdraw = require('./models/Users/withdraw');
+const Kyc = require('./models/Users/kyc');
 
 const app = express();
 
